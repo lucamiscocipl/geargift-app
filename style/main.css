@@ -26,7 +26,10 @@ body {
   display: flex;
   gap: 14px;
   align-items: center;
+  margin-left: 10px;
   align-self: center !important;
+  cursor: pointer;
+  user-select: none;
 }
 
 .logo-large h1 {
@@ -110,6 +113,15 @@ body {
   width: 1200px;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+}
+
+.divider-1 img {
+  position: absolute;
+  right: -150px;
+  top: 150px;
+  width: 800px;
+  opacity: 0.4;
 }
 .content-box {
   width: 500px;
@@ -167,7 +179,7 @@ body {
   color: black;
 }
 
-.products-catalog {
+.vendors-catalog {
   width: 100%;
   display: grid;
   gap: 60px;
@@ -175,7 +187,7 @@ body {
   grid-template-rows: 200px 200px;
 }
 
-.product {
+.vendor {
   width: 500px;
   height: 200px;
   border: 1px solid gray;
@@ -183,15 +195,79 @@ body {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 15px;
+  cursor: pointer;
+}
+
+.vendor img {
+  height: auto;
+  max-width: 100%;
+}
+
+.vendor h1 {
+  font-size: 16px;
+}
+
+.products-catalog {
+  width: 100%;
+  display: grid;
+  gap: 80px;
+  grid-template-columns: 300px 300px 300px;
+  grid-template-rows: 140px 140px;
+}
+
+.product {
+  width: 300px;
+  height: 140px;
+  border: 1px solid gray;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
 }
 
 .product img {
-  width: 250px;
+  height: auto;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 .product h1 {
-  font-size: 16px;
+  font-size: 14px;
+}
+
+#product-section {
+  margin-top: 50px;
+}
+
+#products-header {
+  position: relative;
+}
+
+.product a {
+  display: flex;
+  background-color: black;
+  width: 200px;
+  height: 60px;
+  color: white;
+  border-radius: 14px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+}
+
+#notify-button:hover {
+  background-color: var(--quantum);
+  transform: scale(1.05);
 }
