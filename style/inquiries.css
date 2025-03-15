@@ -1,0 +1,129 @@
+:root {
+  --quantum: #1c4294;
+}
+
+body {
+  margin: 0;
+  border: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-sm {
+  position: absolute;
+  width: 160px;
+  height: auto;
+  display: flex;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.logo-sm img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.container-mini {
+  width: 800px;
+  height: 500px;
+  border-radius: 24px;
+  display: flex;
+  gap: 40px;
+  background-color: var(--quantum);
+  box-shadow: rgba(14, 107, 199, 0.2) 0px 8px 24px;
+}
+
+.left-side {
+  width: 400px;
+  height: 100%;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.left-side img {
+  transform: scale(0.5);
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.right-side h1 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.right-side input {
+  background-color: white;
+  border: 2px solid gray;
+  color: black;
+  height: 40px;
+  width: 320px;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.inputs {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.team-message {
+  background-color: white;
+  border: 2px solid gray;
+  color: black;
+
+  width: 320px;
+  border-radius: 14px;
+  padding: 15px;
+  height: 160px;
+}
+
+.send-button {
+  padding: 15px;
+  width: 120px;
+  height: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 14px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.705);
+}
+
+@media screen and (max-width: 480px) {
+  .left-side {
+    display: none;
+  }
+
+  .container-mini {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+  }
+  .container {
+    align-items: normal;
+  }
+}

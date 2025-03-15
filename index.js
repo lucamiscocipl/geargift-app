@@ -5,65 +5,71 @@ function scrollToElement(elementt) {
 }
 
 $(document).ready(function () {
-  $(".product a").hide();
   $(window).on("scroll", function () {
     if (window.scrollY > 80) {
-      $(".header").css("background-color", "white");
-      $(".header .logo img").attr("src", "media/geargift-black.png");
-      $(".page h1").css("color", "black");
-      $(".logo-large img:nth-of-type(1)").attr(
+      $("#main-header").css("background-color", "white");
+      $("#main-header .logo img").attr("src", "media/geargift-black.png");
+      $("#main-header .page h1").css("color", "black");
+      $("#main-header .logo-large img:nth-of-type(1)").attr(
         "src",
         "media/geargift-large-black.png"
       );
-      $(".logo-large h1").css("color", "black");
-      $(".page h1::after").css("background", "black");
-      $(".page h1::before").css("background", "black");
+      $("#main-header .logo-large h1").css("color", "black");
+      $("#main-header .page h1::after").css("background", "black");
+      $("#main-header .page h1::before").css("background", "black");
     } else {
-      $(".header").css("background-color", "transparent");
-      $(".header .logo img").attr("src", "media/geargift-white.png");
-      $(".page h1").css("color", "white");
-      $(".logo-large img:nth-of-type(1)").attr(
+      $("#main-header").css("background-color", "transparent");
+      $("#main-header .logo img").attr("src", "media/geargift-white.png");
+      $("#main-header .page h1").css("color", "white");
+      $("#main-header .logo-large img:nth-of-type(1)").attr(
         "src",
         "media/geargift-large-white.png"
       );
-      $(".logo-large h1").css("color", "white");
-      $(".page h1::after").css("background", "white");
-      $(".page h1::before").css("background", "white");
+      $("#main-header .logo-large h1").css("color", "white");
+      $("#main-header .page h1::after").css("background", "white");
+      $("#main-header .page h1::before").css("background", "white");
     }
   });
 
   $(".button").click(function () {
-    console.log("asjd");
     scrollToElement(".divider-2");
   });
 });
 
 $(".vendor:nth-of-type(1)").click(function () {
-  window.location.href = "andymark.html";
+  window.location.href = "vendors/andymark.html";
 });
 
 $(".vendor:nth-of-type(2)").click(function () {
-  window.location.href = "tetrix.html";
+  window.location.href = "vendors/tetrix.html";
 });
 
 $(".vendor:nth-of-type(3)").click(function () {
-  window.location.href = "rev.html";
+  window.location.href = "vendors/rev.html";
 });
 $(".vendor:nth-of-type(4)").click(function () {
-  window.location.href = "gobilda.html";
+  window.location.href = "vendors/gobilda.html";
 });
-
-$(".product").hover(
-  function () {
-    $(this).find("h1").hide();
-    $(this).find("a").fadeIn();
-  },
-  function () {
-    $(this).find("a").hide();
-    $(this).find("h1").fadeIn();
-  }
-);
 
 $(".logo-large").click(function () {
   window.location.href = "index.html";
+});
+
+$("#home").click(function () {
+  window.location.href = "index.html";
+});
+
+$("#contact").click(function () {
+  window.location.href = "inquiries.html";
+});
+
+$(".logo-sm").click(function () {
+  window.location.href = "index.html";
+});
+$("#home-mb").click(function () {
+  window.location.href = "../index.html";
+});
+
+$("#contact-mb").click(function () {
+  window.location.href = "../inquiries.html";
 });

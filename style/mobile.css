@@ -1,0 +1,152 @@
+.menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Hidden initially */
+  width: 250px;
+  height: 100%;
+  z-index: 1000;
+  background: white;
+  color: white;
+  padding-top: 20px;
+  transition: right 0.3s ease-in-out;
+}
+
+.menu a {
+  display: block;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 15px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.menu a:hover {
+  background: #575757;
+}
+
+.menu.active {
+  right: 0;
+}
+
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 480px) {
+  .divider-1 img {
+    display: none;
+  }
+  .header {
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo-large {
+    width: 100%;
+    gap: 5px;
+    justify-content: center;
+    margin-left: 0;
+    transform: scale(1.1);
+  }
+
+  .logo-large img:nth-of-type(1) {
+    width: 120px;
+    height: 30px;
+  }
+
+  .logo-large h1 {
+    font-size: 10px;
+    text-align: center;
+  }
+  .logo-large img:nth-of-type(2) {
+    width: 100px;
+    transform: translateY(-3px);
+  }
+  .pages {
+    display: none;
+  }
+  .content-box {
+    width: 80%;
+    gap: 15px;
+    height: 200px;
+  }
+  .content-box h1 {
+    font-size: 16px;
+  }
+
+  .section-1 {
+    align-items: center;
+    justify-content: flex-end;
+    height: 500px;
+  }
+  .divider-1 {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .vendors-catalog {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .products-catalog {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .divider-2 h1 {
+    font-size: 26px;
+    margin-left: 50px;
+    margin-bottom: 60px;
+  }
+
+  .product {
+    height: 200px;
+    justify-content: space-around;
+  }
+
+  .product img {
+    width: 80px;
+  }
+
+  .product h1 {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 !important;
+  }
+
+  .product a {
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 15px;
+  }
+
+  .section-2 h1 {
+    margin-left: 30px;
+  }
+
+  .vendor {
+    width: 80%;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
