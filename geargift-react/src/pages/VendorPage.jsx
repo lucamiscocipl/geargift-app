@@ -1,39 +1,54 @@
 // filepath: geargift-react/src/pages/VendorPage.jsx
 import { useParams } from 'react-router-dom';
-import { productsData } from '../data/products'; // Import the product data
-import ProductItem from '../components/ProductItem'; // Import the ProductItem component
 import { useEffect, useState } from 'react';
+import ProductItem from '../components/ProductItem';
+import { useFirebase } from '../firebase/FirebaseContext';
 
 function VendorPage() {
   const { vendorName } = useParams();
   const [vendorProducts, setVendorProducts] = useState([]);
-  const [capitalizedVendorName, setCapitalizedVendorName] = useState('');
-
+  const [vendor, setVendor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { vendors, fetchProducts } = useFirebase();
 
   useEffect(() => {
-    // Normalize vendorName from URL to match keys in productsData (e.g., "andymark", "rev")
-    const normalizedVendorName = vendorName?.toLowerCase();
-    if (normalizedVendorName && productsData[normalizedVendorName]) {
-      setVendorProducts(productsData[normalizedVendorName]);
-      setCapitalizedVendorName(vendorName.charAt(0).toUpperCase() + vendorName.slice(1));
-    } else {
-      setVendorProducts([]); // Handle case where vendorName is not found
-      setCapitalizedVendorName(vendorName || 'Unknown');
+    const loadVendorData = async () => {
+      setLoading(true);
+      // Find vendor from context
+      const foundVendor = vendors.find(
+        v => v.name.toLowerCase() === vendorName.toLowerCase()
+      );
+      
+      if (foundVendor) {
+        setVendor(foundVendor);
+        // Fetch products for this vendor
+        const products = await fetchProducts(foundVendor.id);
+        setVendorProducts(products);
+      } else {
+        setVendorProducts([]);
+      }
+      setLoading(false);
+    };
+    
+    if (vendorName && vendors.length > 0) {
+      loadVendorData();
     }
-  }, [vendorName]);
+  }, [vendorName, vendors, fetchProducts]);
 
   return (
     <div className="container">
       <div className="section-2" id="product-section">
         <div className="divider-2">
-          <h1>{capitalizedVendorName} products</h1>
+          <h1>{vendor ? vendor.name : vendorName} products</h1>
           <div className="products-catalog">
-            {vendorProducts.length > 0 ? (
-              vendorProducts.map((product, index) => (
-                <ProductItem key={index} product={product} />
+            {loading ? (
+              <p>Loading products...</p>
+            ) : vendorProducts.length > 0 ? (
+              vendorProducts.map((product) => (
+                <ProductItem key={product.id} product={product} />
               ))
             ) : (
-              <p>No products found for {capitalizedVendorName}.</p>
+              <p>No products found for {vendor ? vendor.name : vendorName}.</p>
             )}
           </div>
         </div>

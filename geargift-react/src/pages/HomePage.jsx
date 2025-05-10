@@ -1,15 +1,13 @@
 // filepath: geargift-react/src/pages/HomePage.jsx
-import { Link } from 'react-router-dom'; // Make sure this is present
-
-// You'll migrate content from your old index.html's body here
-// Remember to adjust image paths, e.g., src="/media/geargift-white.png"
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useFirebase } from '../firebase/FirebaseContext';
 
 function HomePage() {
-  // Placeholder for scrollToElement logic, or use React-specific scroll libraries
+  const { vendors, loading, error } = useFirebase();
+  
   const handleExploreVendorsClick = () => {
-    // Example: document.querySelector('.divider-2').scrollIntoView({ behavior: 'smooth' });
-    // Or better, use refs if the target is within a React component.
-    const element = document.querySelector('.divider-2'); // Simple for now
+    const element = document.querySelector('.divider-2');
     if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -37,18 +35,17 @@ function HomePage() {
         <div className="divider-2">
           <h1>Our vendors</h1>
           <div className="vendors-catalog">
-            <Link to="/vendors/andymark" className="vendor">
-               <img style={{transform: "translateY(-10px)"}} src="/media/andymark-logo.png" alt="Andymark" />
-            </Link>
-             <Link to="/vendors/tetrix" className="vendor">
-               <img src="/media/tetrix-logo.png" alt="Tetrix" />
-            </Link>
-             <Link to="/vendors/rev" className="vendor">
-               <img src="/media/rev-logo.png" alt="REV" />
-            </Link>
-             <Link to="/vendors/gobilda" className="vendor">
-               <img style={{transform: "translateY(20px)"}} src="/media/gobilda-logo.png" alt="goBILDA" />
-            </Link>
+            {loading ? (
+              <p>Loading vendors...</p>
+            ) : error ? (
+              <p>Error loading vendors: {error}</p>
+            ) : (
+              vendors.map((vendor) => (
+                <Link to={`/vendors/${vendor.name.toLowerCase()}`} className="vendor" key={vendor.id}>
+                  <img src={vendor.logo} alt={vendor.name} />
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </div>

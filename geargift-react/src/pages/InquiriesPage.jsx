@@ -1,39 +1,57 @@
 // filepath: geargift-react/src/pages/InquiriesPage.jsx
 import { useState } from 'react';
+import { useFirebase } from '../firebase/FirebaseContext';
 
 function InquiriesPage() {
   const [teamName, setTeamName] = useState('');
   const [teamEmail, setTeamEmail] = useState('');
   const [teamMessage, setTeamMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const { addInquiry } = useFirebase();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission
-    // Basic validation (can be expanded)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Basic validation
     if (!teamName || !teamEmail || !teamMessage) {
       alert('Please fill in all fields.');
       return;
     }
-    // Handle the form submission logic (e.g., send data to a server)
-    console.log({
-      name: teamName,
-      email: teamEmail,
-      message: teamMessage,
-    });
-    alert('Inquiry sent! (Check console for data)');
-    // Optionally, clear the form
-    setTeamName('');
-    setTeamEmail('');
-    setTeamMessage('');
+    
+    setSubmitting(true);
+    setSubmitMessage('');
+    
+    try {
+      // Send to Firebase
+      const inquiryData = {
+        name: teamName,
+        email: teamEmail,
+        message: teamMessage,
+      };
+      
+      await addInquiry(inquiryData);
+      
+      // Reset form
+      setTeamName('');
+      setTeamEmail('');
+      setTeamMessage('');
+      setSubmitMessage('Your inquiry has been submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting inquiry:', error);
+      setSubmitMessage(`Error submitting inquiry: ${error.message}`);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}>
-      {/* Uncomment this if it's part of the layout */}
       <div className="logo-sm"><img src="/media/qrobotics-logo.png" alt="QRobotics Small Logo"/></div>
       <div className="container-mini">
         <div className="left-side"><img src="/media/geargift-white.png" alt="Geargift White"/></div>
         <div className="right-side">
-          <form onSubmit={handleSubmit}> {/* Use a form element */}
+          <form onSubmit={handleSubmit}>
             <div className="inputs">
               <h1>Do you have a special request?</h1>
               <input
@@ -42,23 +60,33 @@ function InquiriesPage() {
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
                 required
+                disabled={submitting}
               />
               <input
-                type="email" // Add type for better validation/UX
+                type="email"
                 className="team-email"
                 placeholder="Ex: quantum.robotics@ichb.ro"
                 value={teamEmail}
                 onChange={(e) => setTeamEmail(e.target.value)}
                 required
+                disabled={submitting}
               />
               <textarea
                 className="team-message"
-                placeholder="Your message..." // Added placeholder
+                placeholder="Your message..."
                 value={teamMessage}
                 onChange={(e) => setTeamMessage(e.target.value)}
                 required
+                disabled={submitting}
               ></textarea>
-              <button type="submit" className="send-button">Send Inquiry</button> {/* Changed to button type submit */}
+              <button type="submit" className="send-button" disabled={submitting}>
+                {submitting ? 'Sending...' : 'Send Inquiry'}
+              </button>
+              {submitMessage && (
+                <p style={{ color: submitMessage.includes('Error') ? 'red' : 'green' }}>
+                  {submitMessage}
+                </p>
+              )}
             </div>
           </form>
         </div>
