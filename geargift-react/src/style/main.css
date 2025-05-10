@@ -1,0 +1,532 @@
+/* CSS Variables */
+:root {
+  --quantum: #1c4294;
+  --accent: #f9ae06;
+  --accent-hover: #e09700;
+  
+}
+
+
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color: var(--quantum);
+  overflow-x: hidden;
+  color: white;
+  display: block; /* Ensure body is block, not flex */
+  
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: block; /* Ensure root is block, not flex */
+}
+
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: var(--quantum);
+  z-index: 10;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.header.scrolled {
+  background-color: white;
+}
+
+.header .logo-large {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header .logo-large img {
+  height: 40px;
+}
+
+.header .logo-large h1 {
+  font-size: 18px;
+  font-weight: normal;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.header.scrolled .logo-large h1 {
+  color: black;
+}
+
+.header .pages {
+  display: flex;
+  gap: 20px;
+}
+
+.header .page h1 {
+  font-size: 18px;
+  color: white;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.header.scrolled .page h1 {
+  color: black;
+}
+
+.header .page h1::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.header.scrolled .page h1::after {
+  background-color: black;
+}
+
+.header .page:hover h1::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.header.scrolled .hamburger {
+  color: black;
+}
+
+/* Mobile Menu */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--quantum);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  transition: left 0.3s ease;
+}
+
+.menu.active {
+  left: 0;
+}
+
+.menu a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a:first-child {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+}
+
+/* Main Container and Sections */
+.container {
+  width: 100vw;
+  display: relative; /* Critical: This makes sections stack vertically */
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column; /* This ensures sections stack vertically */
+  width: 100%;
+}
+
+.section-1 {
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px; 
+  padding-bottom: 150px; /* Increased from 100px to 150px */
+}
+
+.divider-1 {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 0; /* Reduced padding */
+  position: relative; /* For absolute positioning of the image */
+}
+
+.content-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  border-radius: 8px;
+  padding: 30px;
+  backdrop-filter: blur(5px); /* Optional: adds a blur effect */
+  z-index: 2; /* Ensures text is above any background elements */
+  align-items: center; /* Center content horizontally */
+}
+
+/* Remove or comment out the existing absolute positioning for the image */
+/*
+.divider-1 img {
+  max-width: 45%;
+  height: auto;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0.9;
+  animation: float 6s ease-in-out infinite;
+}
+*/
+
+/* New styles for the logo inside the content box */
+.content-box img.hero-logo {
+  width: 450px; /* Increased from 200px to 350px */
+  height: auto;
+  margin-bottom: 20px; /* Space between logo and text */
+  animation: pulse 4s ease-in-out infinite; /* Subtle animation */
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Update the text styling to maintain proper alignment */
+.content-box h1 {
+  font-size: 24px;
+  line-height: 1.5;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Improves readability */
+  text-align: center; /* Center-align text */
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--accent);
+  color: black;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.button:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+/* Vendors Section */
+.section-2 {
+  width: 100vw; /* Use viewport width to ensure full width */
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0; /* Changed from 80px to 0 to remove space */
+  max-width: 100%; /* Ensure no max-width is restricting it */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  padding: 80px 0 80px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  overflow-x: hidden; /* Prevent horizontal scrollbars */
+  left: 0; /* Ensure alignment from the left edge */
+  right: 0; /* Ensure alignment to the right edge */
+}
+
+/* Make divider-2 stretch across the whole screen */
+.divider-2 {
+  width: 100%; /* Changed from 90% to 100% */
+  max-width: none; /* Remove max-width constraint */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin: 0 auto;
+  
+}
+
+/* Keep the heading centered */
+.divider-2 h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px; /* Add some spacing below the heading */
+}
+
+/* Make the vendors catalog stretch across the full width */
+.vendors-catalog {
+  width: 100%;
+  max-width: 1200px; /* Add a max-width to control the overall size */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Exactly 2 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows with auto height */
+  gap: 50px; /* Increased gap for better separation */
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 45px;
+
+}
+
+/* Update vendor cards to maintain consistent height and width */
+.vendor {
+  width: 521px; /* Fixed width */
+  height: 180px; /* Fixed height */
+  background-color: white;
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+/* Products Section */
+.products-catalog {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.product {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  height: 100%; /* Ensure consistent height */
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 20px;
+  flex: 1 1 auto; /* Allow image to take available space */
+}
+
+.product h1 {
+  font-size: 16px;
+  padding: 15px;
+  text-align: center;
+  background-color: var(--quantum);
+  color: white;
+  margin: 0;
+  flex: 0 0 auto; /* Don't allow title to grow */
+}
+
+/* Update product button to fill entire bottom */
+.product a {
+  display: block; /* Change from inline-block to block */
+  width: 100%; /* Take up full width */
+  padding: 12px 0; /* Vertical padding only */
+  background-color: var(--accent);
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Push button to bottom of flex container */
+  border-radius: 0; /* Remove any border radius */
+}
+
+/* Inquiries Page */
+.container-mini {
+  width: 90%;
+  max-width: 1000px;
+  background-color: var(--quantum);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.left-side {
+  flex: 1;
+  background-color: var(--quantum);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.left-side img {
+  max-width: 100%;
+}
+
+.right-side {
+  flex: 1;
+  padding: 40px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputs h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.inputs input, 
+.inputs textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.inputs textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.send-button {
+  padding: 12px;
+  background-color: var(--accent);
+  color: black;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.send-button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Logo Small (for inquiries page) */
+.logo-sm {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logo-sm img {
+  height: 40px;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
+  
+  .header .pages {
+    display: none;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  
+  .section-1 {
+    min-height: auto;
+    padding: 100px 0 50px; /* Adjust for mobile */
+  }
+  
+  .divider-1 {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .divider-1 img {
+    position: static; /* Reset position for small screens */
+    max-width: 80%;
+    order: -1; /* Show image before text on mobile */
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+  
+  .content-box {
+    width: 100%;
+    align-items: center;
+    padding: 25px 20px;
+  }
+  
+  .vendors-catalog {
+    grid-template-columns: 1fr; /* Switch to single column on smaller screens */
+    grid-template-rows: repeat(4, auto); /* 4 rows */
+    gap: 30px; /* Reduce gap on smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .vendors-catalog {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-catalog {
+    grid-template-columns: 1fr;
+  }
+  
+  .divider-1, .divider-2 {
+    width: 95%;
+  }
+}

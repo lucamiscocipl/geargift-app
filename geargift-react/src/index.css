@@ -1,0 +1,39 @@
+/* Keep or modify Vite's base styles as needed */
+/* Example: Minimal reset and global font */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Or your project's primary font */
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Define your color variables here if they are used globally, or ensure they are defined in main.css */
+  --quantum: #12002b; /* Example, ensure this matches your actual variable */
+  --accent: #ff00ff;  /* Example */
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--quantum);
+  overflow-x: hidden;
+  color: white;
+  /* CRITICAL: Ensure NO 'display: flex' here if you want .container to manage its own flow */
+}
+
+#root {
+
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+}
