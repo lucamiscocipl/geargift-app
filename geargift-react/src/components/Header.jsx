@@ -1,18 +1,31 @@
 // filepath: geargift-react/src/components/Header.jsx
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react'; // For scroll and mobile menu logic
+import { useState, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = getAuth();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 80);
     };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    // Check authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      unsubscribe();
+    };
+  }, [auth]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -37,11 +50,17 @@ function Header() {
         <button className="hamburger" onClick={toggleMobileMenu}>☰</button>
         <div className="pages">
           <div className="page" id="home">
-            {/* Page links will be styled by CSS via .header.scrolled .page h1 */}
             <Link to="/"><h1>Home</h1></Link>
           </div>
           <div className="page" id="contact">
             <Link to="/inquiries"><h1>Inquire</h1></Link>
+          </div>
+          <div className="page" id="team-login">
+            {isLoggedIn ? (
+              <Link to="/team-dashboard"><h1>My Team</h1></Link>
+            ) : (
+              <Link to="/login"><h1>Team Login</h1></Link>
+            )}
           </div>
           <div className="page" id="cart">
             <Link to="/cart"><h1>Cart</h1></Link>
@@ -52,7 +71,11 @@ function Header() {
         <a onClick={toggleMobileMenu}>Close ✖</a>
         <Link to="/" onClick={toggleMobileMenu}>Home</Link>
         <Link to="/inquiries" onClick={toggleMobileMenu}>Inquire</Link>
-        {/* Update path when cart page is created */}
+        {isLoggedIn ? (
+          <Link to="/team-dashboard" onClick={toggleMobileMenu}>My Team</Link>
+        ) : (
+          <Link to="/login" onClick={toggleMobileMenu}>Team Login</Link>
+        )}
         <Link to="/cart" onClick={toggleMobileMenu}>Cart</Link>
       </div>
     </>
