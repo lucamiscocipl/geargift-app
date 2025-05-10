@@ -36,7 +36,8 @@ function LoginPage() {
             teamName: teamName,
             email: email,
             createdAt: new Date(),
-            components: [] // Initialize empty components list
+            components: [], // Initialize empty components list
+            cart: [] // Initialize empty cart
           });
           console.log("Team data stored successfully");
         } catch (dbError) {
@@ -92,7 +93,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ paddingTop: '120px' }}>
       <div className="logo-sm"><img src="/media/qrobotics-logo.png" alt="QRobotics Logo"/></div>
       <div className="container-mini login-container">
         <div className="left-side">

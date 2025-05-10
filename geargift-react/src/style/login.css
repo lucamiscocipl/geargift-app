@@ -2,6 +2,7 @@
 .login-container {
   max-width: 800px;
   min-height: 500px;
+  margin-top: 20px;
 }
 
 .toggle-form {

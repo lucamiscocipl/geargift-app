@@ -2,11 +2,13 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useCart } from '../context/CartContext';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { cartCount } = useCart();
   const auth = getAuth();
 
   useEffect(() => {
@@ -63,7 +65,12 @@ function Header() {
             )}
           </div>
           <div className="page" id="cart">
-            <Link to="/cart"><h1>Cart</h1></Link>
+            <Link to="/cart">
+              <h1>
+                Cart
+                {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+              </h1>
+            </Link>
           </div>
         </div>
       </div>
@@ -76,7 +83,9 @@ function Header() {
         ) : (
           <Link to="/login" onClick={toggleMobileMenu}>Team Login</Link>
         )}
-        <Link to="/cart" onClick={toggleMobileMenu}>Cart</Link>
+        <Link to="/cart" onClick={toggleMobileMenu}>
+          Cart {cartCount > 0 && `(${cartCount})`}
+        </Link>
       </div>
     </>
   );

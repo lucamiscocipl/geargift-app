@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { FirebaseProvider } from './firebase/FirebaseContext';
 import { AuthProvider } from './firebase/AuthContext';
+import { CartProvider } from './context/CartContext';
   
 import './index.css';
 import './style/main.css';
@@ -12,9 +13,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <FirebaseProvider>
       <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <CartProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CartProvider>
       </AuthProvider>
     </FirebaseProvider>
   </StrictMode>,

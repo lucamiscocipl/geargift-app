@@ -1,35 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useCart } from '../context/CartContext';
 
 function ProductItem({ product }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 480);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { addToCart } = useCart();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 480);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const showButton = isMobileView || isHovered;
-  const showName = isMobileView || !isHovered;
-
-  // Basic notification handler
-  const handleNotifyOwner = (productName) => {
-    alert(`Notification for ${productName} would be sent here.`);
-    // In a real app, this would trigger an API call or other logic
+  const handleAddToCart = () => {
+    addToCart(product);
+    
+    // Show "Added" feedback briefly
+    setAddedToCart(true);
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 2000);
   };
 
   return (
-    <div
-      className="product"
-      onMouseEnter={() => !isMobileView && setIsHovered(true)}
-      onMouseLeave={() => !isMobileView && setIsHovered(false)}
-    >
+    <div className="product">
       <img src={product.imgSrc} alt={product.name} />
-      {showName && <h1>{product.name}</h1>}
-      {showButton && <a onClick={() => handleNotifyOwner(product.name)} style={{cursor: 'pointer'}}>Notify owner</a>}
+      <h3>{product.name}</h3>
+      <div className="product-info">
+        <p className="product-vendor">{product.vendorName}</p>
+      </div>
+      <div className="product-actions">
+        <button 
+          className={`cart-button ${addedToCart ? 'added' : ''}`}
+          onClick={handleAddToCart}
+          disabled={addedToCart}
+        >
+          {addedToCart ? 'Added to Cart' : 'Add to Cart'}
+        </button>
+      </div>
     </div>
   );
 }

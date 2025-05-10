@@ -376,20 +376,63 @@ body {
   flex: 0 0 auto; /* Don't allow title to grow */
 }
 
-/* Update product button to fill entire bottom */
-.product a {
-  display: block; /* Change from inline-block to block */
-  width: 100%; /* Take up full width */
-  padding: 12px 0; /* Vertical padding only */
-  background-color: var(--accent);
-  color: black;
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
+/* Add to your main.css file */
+.product-actions {
+  margin-top: 12px;
+}
+
+.cart-button {
+  background-color: var(--quantum);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: auto; /* Push button to bottom of flex container */
-  border-radius: 0; /* Remove any border radius */
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.cart-button:hover {
+  background-color: #143578;
+}
+
+.cart-button.added {
+  background-color: #4CAF50;
+}
+
+.cart-button:disabled {
+  cursor: default;
+}
+
+.cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Product info */
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.product-vendor {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.product-price {
+  font-weight: bold;
+  margin: 0;
 }
 
 /* Inquiries Page */

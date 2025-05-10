@@ -73,9 +73,25 @@ function TeamDashboardPage() {
     setMessage('');
     
     try {
+      // Ensure each component has the correct structure needed for matching
+      const componentsToSave = selectedComponents.map(component => {
+        // Make sure vendorName is included
+        if (!component.vendorName && component.vendorId) {
+          // If a vendor is found with this ID in availableComponents
+          const vendor = availableComponents.find(c => c.vendorId === component.vendorId);
+          if (vendor) {
+            return {
+              ...component,
+              vendorName: vendor.vendorName
+            };
+          }
+        }
+        return component;
+      });
+      
       // Save selected components to team profile
       await updateDoc(doc(db, 'teams', auth.currentUser.uid), {
-        components: selectedComponents
+        components: componentsToSave
       });
       
       setMessage('Your available components have been updated!');
@@ -98,14 +114,14 @@ function TeamDashboardPage() {
 
   if (loading) {
     return (
-      <div className="container">
+      <div className="container" style={{ paddingTop: '100px' }}>
         <div className="loading">Loading team dashboard...</div>
       </div>
     );
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" style={{ paddingTop: '100px' }}>
       <div className="dashboard-header">
         <div className="team-info">
           <h1>Team Dashboard: {teamData?.teamName}</h1>
