@@ -93,7 +93,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="container" style={{ paddingTop: '120px' }}>
+    <div className="container page-center">
       <div className="logo-sm"><img src="/media/qrobotics-logo.png" alt="QRobotics Logo"/></div>
       <div className="container-mini login-container">
         <div className="left-side">

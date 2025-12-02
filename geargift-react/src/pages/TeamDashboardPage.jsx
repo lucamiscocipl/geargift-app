@@ -114,7 +114,7 @@ function TeamDashboardPage() {
 
   if (loading) {
     return (
-      <div className="container" style={{ paddingTop: '100px' }}>
+      <div className="container page-center">
         <div className="loading">Loading team dashboard...</div>
       </div>
     );

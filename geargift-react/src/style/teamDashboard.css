@@ -1,6 +1,6 @@
 /* Team Dashboard styles */
 .dashboard-container {
-  width: 100%;
+  width: 100vw;
   padding-bottom: 60px;
   background-color: #f5f7fa;
   min-height: 100vh;
@@ -8,9 +8,10 @@
 }
 
 .dashboard-header {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto 30px;
-  padding: 0 20px;
+  padding: 0 24px; /* side gutters */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,9 +43,10 @@
 }
 
 .dashboard-content {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px; /* side gutters */
 }
 
 .component-selection {
@@ -52,12 +54,14 @@
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   padding: 30px;
+  width: 100%;
 }
 
 .selection-header {
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
   padding-bottom: 20px;
+  text-align: center;
 }
 
 .selection-header h2 {
@@ -81,9 +85,10 @@
 
 .components-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   margin-bottom: 30px;
+  justify-items: stretch; /* make cards fill their grid cells */
 }
 
 .component-card {
@@ -93,6 +98,7 @@
   transition: all 0.2s;
   cursor: pointer;
   position: relative;
+  width: 100%;
 }
 
 .component-card:hover {
@@ -158,7 +164,8 @@
 
 .save-section {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 16px;
   align-items: center;
   margin-top: 20px;
   padding-top: 20px;
