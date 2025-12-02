@@ -1,0 +1,24 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+import { FirebaseProvider } from './firebase/FirebaseContext';
+import { AuthProvider } from './firebase/AuthContext';
+import { CartProvider } from './context/CartContext';
+  
+import './index.css';
+import './style/main.css';
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <FirebaseProvider>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
+    </FirebaseProvider>
+  </StrictMode>,
+);

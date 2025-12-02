@@ -1,0 +1,33 @@
+/* Login page styles */
+.login-container {
+  max-width: 800px;
+  min-height: 500px;
+  margin-top: 20px;
+}
+
+.toggle-form {
+  font-size: 14px;
+  color: #ddd;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.toggle-form span {
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.toggle-form span:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.inputs p {
+  margin: 0;
+}
